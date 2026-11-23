@@ -143,6 +143,20 @@ sensor.read(SensorParameter.PH) { value ->
 }
 ```
 
+| Parameter | Unit | Time to stabilize after inserting into soil |
+|---|---|---|
+| Temperature | °C | ~3–5 seconds |
+| Moisture | % | ~3–5 seconds |
+| Conductivity (EC) | µS/cm | ~3–5 seconds |
+| pH | pH | **~3–5 minutes** |
+| Nitrogen (N) | mg/kg | ~3–5 seconds |
+| Phosphorus (P) | mg/kg | ~3–5 seconds |
+| Potassium (K) | mg/kg | ~3–5 seconds |
+| Fertility | mg/kg | ~3–5 seconds |
+
+> ⚠️ **pH needs more time than the other parameters.** Most values (temperature, moisture, EC, N, P, K, fertility) stabilize within 3–5 seconds of inserting the probe into soil. **pH readings take noticeably longer — typically 3–5 minutes** to settle to an accurate value, per sensor manufacturer guidance. If you read `pH` immediately after insertion, expect the value to drift before it stabilizes; consider waiting or showing a "stabilizing" indicator in your UI specifically for pH.
+
+
 > ⏱ **Minimum read interval: 1000ms.**
 > Do not call `readAll()` / `read()` faster than once per second — the sensor communicates over a slow serial link and faster polling can cause read failures or timeouts.
 
